@@ -1,32 +1,33 @@
-# Tutorial 1 - The Basics
+# チュートリアル 1 - 基礎
 
-In this first tutorial we are going to create and configure a minimum
-ClojureScript ([CLJS][1]) project by using the [boot][2] build tool.
+この最初のチュートリアルでは、最小のClojurescript([CLJS][1]) のプロジェクトを
+[boot][2]というビルドツールを用いて構成します。
 
-## Requirements
+## 要求事項
 
-This tutorial requires `java` and `boot` to be installed on your
-computer.
+このチュートリアルでは `java` と `boot` がコンピュータにインストールされていることが前提です。
 
-To install `java` follow the [instructions][3] for your operating
-system. To install `boot` follow the very easy instructions in the
-corresponding section of its [README][4].
+`java` をインストレールするためには [instructions][3] のそれぞれのオペーレーティングシステム
+の手順に従いましょう。
+`boot` をインストールするためには非常に簡単な手順の[README][4]の対応するセクションに従いましょう。
 
-Test the installation by issuing the `boot -h` command at the
-terminal. Then submit the `boot -u` command to get the latest `boot`
-updates.
 
-> NOTE 1: I strongly suggest to use Java 8. If you're using Java 7, it
+ターミナルからの `boot -h` コマンドによりインストールのテストが出来ます。そして、 `boot -u` 
+コマンドにより最新の `boot` のアップデートを得ることができます。
+
+> NOTE 1: Java 8を利用することを強く推奨します。もし、Java 7を利用しているのであれば、以下を
+> 言及しておく価値があります。
 > might be worth mentioning
 > https://github.com/boot-clj/boot/wiki/JVM-Options#permgen-errors
 
-## Create the project structure
+## プロジェクト構造の作成
 
-A minimum CLJS web project is composed of 3 files:
+最小のCLJSのwebプロジェクトは3つのファイルより構成されます。
 
-* an html page;
-* a CLJS source code;
-* a `boot` build file to compile CLJS source code.
+- 1つのhtmlページ;
+- 1つのCLJSソースコード;
+- CLJSソースコードをコンパイルするための1つの `boot` ビルドファイル
+
 
 Even if CLJS does not dictate a specific directory structure, it's a
 good practice to organize your project in such a way that it will be
