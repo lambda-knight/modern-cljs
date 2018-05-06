@@ -1,20 +1,32 @@
-# Tutorial 4 - Modern ClojureScript
+# チュートリアル 4 - Modern ClojureScript
 
-In this tutorial we're going to port to CLJS a JavaScript (JS) sample
-from the book [Modern JavaScript: Develop and Design][1] by
-[Larry Ullman][2]. You can download the code from the book [here][3].
+このチュートリアルでは、[Larry Ullman] [2]の書籍[Modern JavaScript: Develop and Design][1] からJavaScript（JS）サンプルをCLJSに移植します。 コードは[Larry Ullman][2].の本からダウ
+ンロードできます。
 
-The reason I chose it as a reference is because it starts smoothly, but
-keeps a robust approach to JS coding. I think that bringing Larry's
-approach from JS into ClojureScript (CLJS) could be helpful to anyone
-not yet fluent in CLJS.
+この内容をリファレンスとして選択した理由はスムーズに開始できること、その上でJSコーディングに
+対する堅牢なアプローチを保っているからです。 
+
+私は、JSからClojureScript（CLJS）へのLarryのアプローチをもたらすことは、CLJSにまだ慣れていな
+い人にとっても役立つと思います。
+
+私たちは[前のチュートリアル] [4]で設定した即時フィードバック開発環境（IFDE）を使用して移
+植を行います。 
+
+私たちはbREPLの使用を、移植のどのフェーズにおいてもIFDE(即時フィードバック)を停止させ
+ることなく、好きなところでプログラミングエディタを使用してインターリーブします。 
+
+これは、利用可能なそれぞれのアプローチとツールから最善を尽くして、一貫した開発を実証
+することです。
 
 We'll do the porting by using the Immediate Feedback Development
-Environment (IFDE) we set up in the [previous tutorial][4]. We'll
-interleave the use of the bREPL with the use of a programming editor,
+Environment (IFDE) we set up in the [previous tutorial][4]. 
+
+We'll interleave the use of the bREPL with the use of a programming editor,
 whichever you like or use, without stopping the IFDE in any phase of
-the porting itself. This is to demonstrate a kind of continuous
-development taking the best from each available approach and tool.
+the porting itself. 
+
+This is to demonstrate a kind of continuous development taking the best 
+from each available approach and tool.
 
 ## Preamble
 
