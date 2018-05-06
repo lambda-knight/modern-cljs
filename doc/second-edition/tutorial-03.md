@@ -66,8 +66,6 @@ boot wait serve -d target cljs target
 
 ### CLJS再コンパイル
 
-To trigger the CLJS recompilation whenever we save a modified CLJS source file, we substituted the `wait` task with the `watch` task which requires to be positioned before the `cljs` task.
-
 変更されたCLJSソースファイルを保存するたびにCLJSの再コンパイルをトリガするために、 `cljs`タスクの前に配置する必要がある `wait`タスクを `watch`タスクに置き換えました。
 
 ```bash
