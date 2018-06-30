@@ -133,17 +133,24 @@ boot serve -d target watch reload cljs-repl cljs target
    (target :dir #{"target"})))
 ```
 
-Note the use of the `comp` function in the body of the newly created
-`dev` via the `deftask` macro. The `comp` function composes the same
-tasks in the same order we saw in the `boot` command. The only
-differences are the way the `"target"` values are passed to `serve`
+`deftask`マクロを介して新しく作成された` dev`の本体で `comp`関数を使うこと
+に注意してください。  `comp` 関数は `boot` コマンドと同じ順序で同じタスクを
+構成します。 
+
+唯一の違いは コマンドラインで引数 としてではなく`"target"` の値が `serve` に`：dir` キーワードの引数として `target` サブタスクに`target` が渡される方法である。
+
+さらに `target`タスクに渡される値は単純な文字列（例えば `target`）ではなく、文字列のセット
+（ `#{""target"}`）であることです。
+
+現時点では、`boot`が複数のディレクトリに出力を生成できても、この選択の理由が何であるかを
+理解することに我々は興味がありません。
+
+新しく定義された `dev`タスクは、コマンドラインで利用できるようになりました：
+
+The only differences are the way the `"target"` values are passed to `serve`
 and to `target` subtasks as a `:dir` keyword argument instead of as an
-argument at the command-line. Moreover, the value passed to the
-`target` task is not just a simple string (i.e., `"target"`), but a
-set of strings (i.e., `#{"target"}`). At the moment we're not
-interested in understanding what could be the reason of this choice,
-even if you could suspect that `boot` is able to generate output in
-more than one directory.
+argument at the command-line. 
+
 
 The newly defined `dev` task is now available to be used at the
 command-line:

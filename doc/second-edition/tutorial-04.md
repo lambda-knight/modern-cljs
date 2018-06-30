@@ -9,26 +9,15 @@
 私は、JSからClojureScript（CLJS）へのLarryのアプローチをもたらすことは、CLJSにまだ慣れていな
 い人にとっても役立つと思います。
 
-私たちは[前のチュートリアル] [4]で設定した即時フィードバック開発環境（IFDE）を使用して移
-植を行います。 
+私たちは[前のチュートリアル][4]で設定した即時フィードバック開発環境（IFDE - Immediate 
+Feedback Development）を使用して移植を行います。 
 
-私たちはbREPLの使用を、移植のどのフェーズにおいてもIFDE(即時フィードバック)を停止させ
-ることなく、好きなところでプログラミングエディタを使用してインターリーブします。 
+移植のどのフェーズにおいてもIFDEをやめることなく、あなたのお気に入りのプログラミングエディタを
+bREPLの利用に介在させます。
 
-これは、利用可能なそれぞれのアプローチとツールから最善を尽くして、一貫した開発を実証
-することです。
+これは、利用可能なアプローチとツールの中で継続的開発を実際にやってみることになります。
 
-We'll do the porting by using the Immediate Feedback Development
-Environment (IFDE) we set up in the [previous tutorial][4]. 
-
-We'll interleave the use of the bREPL with the use of a programming editor,
-whichever you like or use, without stopping the IFDE in any phase of
-the porting itself. 
-
-This is to demonstrate a kind of continuous development taking the best 
-from each available approach and tool.
-
-## Preamble
+## 序文
 
 If you want to start working from the end of the [previous tutorial][4],
 assuming you've [git][5] installed, do as follows.
@@ -39,7 +28,7 @@ cd modern-cljs
 git checkout se-tutorial-03
 ```
 
-## Introduction
+## はじめに
 
 As everybody knows, in the 1990s JS was primarily used for
 improving and validating HTML forms. Then, in the second half of the

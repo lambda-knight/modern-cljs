@@ -17,7 +17,6 @@
 
 > NOTE 1: Java 8を利用することを強く推奨します。もし、Java 7を利用しているのであれば、以下を
 > 言及しておく価値があります。
-> might be worth mentioning
 > https://github.com/boot-clj/boot/wiki/JVM-Options#permgen-errors
 
 ## プロジェクト構造の作成
@@ -140,23 +139,19 @@ touch html/index.html src/cljs/modern_cljs/core.cljs build.boot
 ```
 
 なんとミニマルなのでしょう! `set-env!` 関数は `:source-paths` と`:resource-paths` 
-オプションに我々が作成したプロジェクト構造に対応する値を設定しています。
+オプションに我々が作成した上記のプロジェクト構造に対応する値を設定しています。
 
-そして `boot-cljs` のコンパイルタスクは
+次に、 `boot-cljs`コンパイルタスクを`：dependencies`キーワードに追加することで、
+プロジェクトの唯一の明示的な依存関係として指定します。
 
-structure as we have created above. Then it injects the `boot-cljs`
-compilation task as the only explicit dependency of the project by
-adding it to the `:dependencies` keyword.
 
-Note that even if we did not include any `clojure` and `clojurescript`
-dependencies, `boot` will be able to automagically download the
-corresponding releases it knows to work well with it.
+'clojure'と'clojurescript'の依存関係が含まれていなくても、'boot'は自動的に対応する
+リリースを自動的にダウンロードできるようになることに注意してください。
 
-Finally, the `require` form makes the `cljs` task visible to the
-`boot` command.
+最後に、 `require`形式は` boot`コマンドに `cljs`タスクを可視化します。
 
-If you now run the `boot -h` command from the terminal, you'll see
-that the `cljs` task is now available to `boot`.
+そして、ターミナルから `boot -h`コマンドを実行すると、` cljs`タスクが `boot`で利用できるようになります。
+
 
 ```bash
 boot -h
@@ -175,8 +170,11 @@ Tasks:   ...
 Do `boot <task> -h` to see usage info and TASK_OPTS for <task>.
 ```
 
+次のコマンドを発行することで、 `cljs`タスクに関する詳細を知りたいかもしれません：
+
 You now may want to have more information about the `cljs` task by
 issuing the following command:
+
 
 ```bash
 boot cljs -h
