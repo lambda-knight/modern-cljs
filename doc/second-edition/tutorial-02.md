@@ -227,8 +227,7 @@ CLJSソースファイルを変更するときはいつでも、あなたのコ�
          '[adzerk.boot-reload :refer [reload]]) ;; make reload visible
 ```
 
-This task has to be inserted in the `boot` command immediately before
-the `cljs` compilation. Give it a try:
+このタスクは、 `cljs`コンパイルの直前に` boot`コマンドに挿入する必要があります。試してみます：
 
 ```bash
 boot serve -d target watch reload cljs target

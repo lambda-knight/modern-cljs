@@ -315,7 +315,7 @@ Writing target dir(s)...
 Elapsed time: 25.922 sec
 ```
 
-Now launch the `nrepl` client in a new terminal:
+新しい端末で `nrepl`クライアントを起動します：
 
 ```clj
 boot repl -c

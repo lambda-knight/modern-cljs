@@ -1,26 +1,17 @@
 # チュートリアル 4 - Modern ClojureScript
 
-このチュートリアルでは、[Larry Ullman] [2]の書籍[Modern JavaScript: Develop and Design][1] からJavaScript（JS）サンプルをCLJSに移植します。 コードは[Larry Ullman][2].の本からダウ
-ンロードできます。
+このチュートリアルでは、[Larry Ullman] [2]の書籍[Modern JavaScript: Develop and Design][1] からJavaScript（JS）サンプルをCLJSに移植します。 コー
+ドは[Larry Ullman][2].の本からダウンロードできます。
 
-この内容をリファレンスとして選択した理由はスムーズに開始できること、その上でJSコーディングに
-対する堅牢なアプローチを保っているからです。 
-
-私は、JSからClojureScript（CLJS）へのLarryのアプローチをもたらすことは、CLJSにまだ慣れていな
-い人にとっても役立つと思います。
-
-私たちは[前のチュートリアル][4]で設定した即時フィードバック開発環境（IFDE - Immediate 
-Feedback Development）を使用して移植を行います。 
-
-移植のどのフェーズにおいてもIFDEをやめることなく、あなたのお気に入りのプログラミングエディタを
-bREPLの利用に介在させます。
-
+この内容をリファレンスとして選択した理由はスムーズに開始できること、その上でJSコーディングに対する堅牢なアプローチを保っているからです。 
+私は、JSからClojureScript（CLJS）へのLarryのアプローチをもたらすことは、CLJSにまだ慣れていない人にとっても役立つと思います。
+私たちは[前のチュートリアル][4]で設定した即時フィードバック開発環境（IFDE - Immediate Feedback Development）を使用して移植を行います。 
+移植のどのフェーズにおいてもIFDEをやめることなく、あなたのお気に入りのプログラミングエディタをbREPLの利用に介在させます。
 これは、利用可能なアプローチとツールの中で継続的開発を実際にやってみることになります。
 
 ## 序文
 
-If you want to start working from the end of the [previous tutorial][4],
-assuming you've [git][5] installed, do as follows.
+[git][5] がインストールされていると仮定して、[previous tutorial][4]の最後から作業を開始する場合は、次のようにします。
 
 ```bash
 git clone https://github.com/magomimmo/modern-cljs.git
@@ -30,34 +21,28 @@ git checkout se-tutorial-03
 
 ## はじめに
 
-As everybody knows, in the 1990s JS was primarily used for
-improving and validating HTML forms. Then, in the second half of the
-2000s, JS started to be used to make asynchronous requests to server-side
-resources and within a few months we had two new buzzwords, Ajax
-and Web 2.0.
+誰もが知っているように、1990年代にJSは主にHTMLフォームの改善と検証に使用されました。その後、2000年代の後半に、JSはサーバー側のリソースへの非
+同期要求を行うために使用され始め、数ヶ月でAjaxとWeb 2.0という2つの新しいバズワードがありました。
 
-As I said, I'm going to follow the already cited [Modern JavaScript][1]
-book to try to translate [Larry Ullman's][2] approach into a kind of
-Modern ClojureScript.
+先ほど触れたように、[Modern JavaScript][1] の本を参照して、[Larry Ullman's][2]アプローチを一種のModern ClojureScriptに変換しようとしま
+す。
 
-So let's start by migrating his first example to CLJS, a login form,
-because it's very instructive both in explaining the evolution of the use
-of JS in the latest decade, and in starting CLJS programming without
-knowing much about Clojure and/or ClojureScript themselves.
+したがって、最初の例をCLJSに移行することから始めましょう。これはログインフォームです。これは、最近の10年でJSの使用の進化を説明することと、
+ClojureやClojureScript自体をあまり知らずにCLJSプログラミングを開始するためには非常に役に立ちます。
 
-## Registration form
 
-If you downloaded the [Modern JS][3] code samples, you'll find `login.html`,
-`css/styles.css` and `js/login.js` files in the `ch02` directory.
+## レジストレーションフォーム
+
+[Modern JS][3] コードサンプルをダウンロードした場合は、 `login.html`、` css / styles.css`、 `js / login.js`ファイルが` ch02`ディレクトリにあ
+ります。
 
 ![Modern ch02 tree][6]
 
-If you open `login.html` with your browser you should see something like
-this:
+ブラウザで `login.html`を開くと、次のように表示されます：
 
 ![Login Form][7]
 
-Now, let's take a look at the HTML.
+さて、HTMLを見てみましょう。
 
 ```html
 <!doctype html>
@@ -101,33 +86,28 @@ Now, let's take a look at the HTML.
 </body>
 </html>
 ```
-### Progressive enhancement and unobtrusive JS
+### プログレッシブなエンハンスと控えめなJS
 
-Note that each element has both a `name` attribute and an `id`
-attribute. The `name` value will be used when the form data is submitted
-to the server-side. The `id` value will be used by JS/CSS.
+各要素には、 `name`属性と` id`属性の両方があります。 `name`値は、フォームデータがサーバー側に送信されるときに使用されます。 `id`値はJS / CSS
+によって使用されます。
 
-The `login.php` script is associated with the `form action`. And
-`login.js` is linked within the html page. Aside from `login.js`,
-there is not any other direct connection between the `form` and the JS
-script. This choice has to do with the so called *progressive
-enhancement* and *unobtrusive JS* approaches that Larry Ullman clearly
-explains in his book.
+`login.php`スクリプトは` form action`に関連付けられています。そして、`login.js`はhtmlページ内でリンクされています。 `login.js`とは別に、`
+form`とJSスクリプトとの直接的な接続はありません。
 
-The following [sequence diagrams][8] show these approaches in action.
+この選択は、ラリー・ウルマン（Larry Ullman）が彼の著書で明確に説明している、いわゆる *プログレッシブ・エンハンスメント*と *控えめなJS* アプロー
+チと関係があります。
 
-#### Server-side only validation
+以下の[sequence diagrams][8] は、これらのアプローチを実際に示しています。
+
+#### サーバーサイドのみのバリデーション
 
 ![Login Form Seq DIA 1][9]
 
-The form submitted by the user will be validated by the server-side PHP
-script named `login.php`. If the validation check passes, the server
-will log in the user, otherwise the server will return the errors to
-the user for correction.
+ユーザーが送信したフォームは、 `login.php`という名前のサーバー側PHPスクリプトによって検証されます。検証チェックがパスすると、サーバーはユー
+ザーにログインします。そうでない場合、サーバーはエラーをユーザーに返して修正します。
 
-Thanks to JS and Ajax, this user experience can be improved a lot. A
-better solution is to perform a client-side validation using JS, which
-brings us to the second sequence diagram.
+JSとAjaxのおかげで、このユーザーエクスペリエンスを大幅に向上させることができます。より良い解決策は、JSを使用してクライアント側の検証を実行す
+ることです。これにより、2番目のシーケンス図が表示されます。
 
 #### Client-side validation
 
