@@ -6,8 +6,7 @@
 
 ## はじめに
 
-[前のチュートリアル][2]の最後から作業を開始したい場合は、[git][3]がインストールされ
-ている前提で次のようにしてください：
+[前のチュートリアル][2]の最後から作業を開始したい場合は、[git][3]がインストールされている前提で次のようにしてください：
 
 ```bash
 git clone https://github.com/magomimmo/modern-cljs.git
@@ -27,16 +26,11 @@ git checkout se-tutorial-01
 `boot` の機能である *task* を徐々に充実させるために懸命に働いています。
 
 
-If you take a look at the [tasks for boot][4] developed by the
-community, you'll discover that we already have everything we need to
-start approaching Bret Victor's principle of Immediate Feedback:
+コミュニティが開発した [tasks for boot][4] を見れば、Bret Victorの即時フィードバックの原則に近づくために必要なものはすべてすでにあることがわかります。
 
-* [`boot-http`][5]: a `boot` task providing a simple CLJ based HTTP
-  server;
-* [`boot-reload`][6]: a `boot` task providing a live-reload of static
-  resources (i.e. CSS, images, etc.);
-* [`boot-cljs-repl`][7]: a `boot` task providing a REPL for CLJS
-  development;
+* [`boot-http`][5]: a `boot` task providing a simple CLJ based HTTP server;
+* [`boot-reload`][6]: a `boot` task providing a live-reload of static resources (i.e. CSS, images, etc.);
+* [`boot-cljs-repl`][7]: a `boot` task providing a REPL for CLJS development;
 
     > NOTE 2: we already used the `boot-cljs` task in the previous tutorial.
 
