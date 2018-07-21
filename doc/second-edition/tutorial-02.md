@@ -28,11 +28,11 @@ git checkout se-tutorial-01
 
 コミュニティが開発した [tasks for boot][4] を見れば、Bret Victorの即時フィードバックの原則に近づくために必要なものはすべてすでにあることがわかります。
 
-* [`boot-http`][5]: a `boot` task providing a simple CLJ based HTTP server;
-* [`boot-reload`][6]: a `boot` task providing a live-reload of static resources (i.e. CSS, images, etc.);
-* [`boot-cljs-repl`][7]: a `boot` task providing a REPL for CLJS development;
+* [`boot-http`][5]: 単純なCLJベースのHTTPサーバを提供する `boot`タスク:
+* [`boot-reload`][6]: 静的リソース（CSS、画像など）のライブリロードを提供する `boot`タスク:
+* [`boot-cljs-repl`][7]: CLJS開発のためのREPLを提供する `boot`タスク:
 
-    > NOTE 2: we already used the `boot-cljs` task in the previous tutorial.
+    > 注2：前のチュートリアルですでに `boot-cljs`タスクを使用しました。
 
 ## CLJベースのhttpサーバ
 
@@ -115,7 +115,8 @@ Options:
   -t, --time MSEC  Set the interval in milliseconds to MSEC.
 ```
 
-Let's see this solution at work:
+この解決方法を見てみましょう：
+
 
 ```bash
 boot wait serve -d target
@@ -259,11 +260,9 @@ HTMLソースファイルを変更して、ブラウザからほぼ即座にフ�
 いいですね。 次のレベルに進む前に `boot`コマンドをもう一度kill（` CTRL-C`）してください。
 
 
-You can even modify the html source file to obtain an almost immediate
-feedback from the browser.
+HTMLソースファイルを変更して、ブラウザからほぼ即座にフィードバックを得ることさえできます。
+いい感じです。次のレベルに進む前に `boot`コマンドをもう一度kill（`CTRL-C`）してください。
 
-Nice stuff. Kill the `boot` command again (`CTRL-C`) before advancing to
-the next level.
 
 ## ブラウザ REPL (bREPL)
 
@@ -277,12 +276,10 @@ CLJSコミュニティは多大なハードワークによってCLJで利用で�
 このスタイルのプログラミングでは、REPLでCLJSフォームを評価し、REPLが接続されているブラウザで即座
 にフィードバックを得ることができます。
 
-The `boot` community has a task to offer in this area, too. Its name is
-`boot-cljs-repl`. As we have already done for the other tasks that `boot`
-does not include, we need to add `boot-cljs-repl` to the dependencies of the
-`build.boot` project file. Then, as usual, we have to require its primary tasks
-(i.e. `cljs-repl` and `start-repl`) to make them visible to the `boot`
-command at the terminal.
+`boot`コミュニティはここでも提供可能なタスクを持っています。その名前は `boot-cljs-repl`です。 `boot`には含まれていない他のタスクのためにす
+でに行ったように、` boot-cljs-repl`を `build.boot`プロジェクトファイルの依存関係に追加する必要があります。それから、いつものように端末の
+`boot`コマンドでそれらを見えるようにするために、主タスク（`cljs-repl`と `start-repl`）を要求する必要があります。
+
 
 ```clj
 (set-env!
@@ -433,9 +430,9 @@ Elapsed time: 18.949 sec
 > NOTE: Emacs と CIDER は上記をサポートしています。 これらはこちらから学ぶことができます。
 [resources](https://github.com/magomimmo/modern-cljs/blob/master/doc/supplemental-material/emacs-cider-references.md).
 
-At the moment we're happy enough to be able to run `cljs-repl` from a
-second terminal by first launching the predefined `repl` task included
-with `boot` and passing it the `-c` (i.e. client) option:
+現時点では、 `boot`に含まれている定義済みの` repl`タスクを起動し、`-c`（クライアント）オプションを渡すことで、第2の端末から`
+cljs-repl`を実行できることで十分です：
+
 
 ```bash
 # in a new terminal
@@ -457,9 +454,7 @@ Find by Name: (find-name "part-of-name-here")
 boot.user=>
 ```
 
-This is a standard CLJ REPL defaulted to the `boot.user`
-namespace. From here we can launch a browser based CLJS REPL (bREPL) as
-follows:
+これは `boot.user`名前空間にデフォルト設定された標準のCLJ REPLです。ここから、ブラウザベースのCLJS REPL（bREPL）を次のように起動できます。
 
 ```cljs
 boot.user=> (start-repl)
@@ -468,9 +463,9 @@ boot.user=> (start-repl)
 Writing boot_cljs_repl.cljs...
 ```
 
-The terminal is now waiting for a client connection from the
-browser. Visit the usual http://localhost:3000 URL to activate the
-bREPL connection.
+端末は、ブラウザからのクライアント接続を待っています。 bREPL接続を有効
+にするには、通常のhttp://localhost:3000 であるURLを参照してください。
+
 
 ```cljs
  connected! >>
@@ -479,31 +474,28 @@ nil
 cljs.user=>
 ```
 
-To confirm that you can evaluate CLJS forms from the bREPL,
-submit the alert function to the browser:
+bREPLからCLJSフォームを評価できることを確認するには、アラート関数をブラウザに送信します。
+
 
 ```cljs
 (js/alert "Hello, ClojureScript")
 nil
 ```
 
-To stop the bREPL, submit the `:cljs/quit` expression. Then stop the
-CLJ REPL (CTRL-D or `(exit)` or `(quit)`). Finally stop `boot`
-(CTRL-C).
+bREPLを停止するには、 `：cljs / quit`式を実行してください。その後、CLJ REPLを停止します（CTRL-Dまたは `（exit）`または `（quit）`）。最後に
+`boot`（CTRL-C）を止めてください。
 
-Before stepping to the next tutorial reset your git repository:
+次のチュートリアルに進む前に、gitリポジトリをリセットしてください。
 
 ```bash
 git reset --hard
 ```
 
-## Next step - [Tutorial 3: House Keeping][9]
+## 次のステップ - [Tutorial 3: House Keeping][9]
 
-In the next [tutorial][9] we're going to automate the launching of the
-`boot` command to approach the Immediate Feedback Development
-Environment (IFDE).
+次の [tutorial][9] では、即時フィードバック開発環境（IFDE）にアプローチするための `boot`コマンドの起動を自動化します。
 
-# License
+# ライセンス
 
 Copyright © Mimmo Cosenza, 2012-2015. Released under the Eclipse Public
 License, the same as Clojure.
