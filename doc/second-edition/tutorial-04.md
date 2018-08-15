@@ -244,9 +244,10 @@ function validateForm() {
 わかった、それは非常に基本的な検証ですが、それはこのアプローチを実証するのに役立つ一種のプレースホルダーです。
 
 
-### bREPLing with CLJS
+### CLJSによるbREPLing 
 
-Launch the bREPL as usual:
+いつものようにbREPLを起動してください：
+
 
 ```clj
 boot repl -c
@@ -274,21 +275,18 @@ cljs.user=>
 ```
 
 
-> NOTE 1: the main `boot` advantage over the [`leiningen`][15] build tool
-> is the ability to use one JVM only by exploiting the JVM
-> classloader. If you work with an `nrepl` compliant editor, you
-> should be able to connect it to the `nrepl` server launched by the
-> `boot dev` command without launching a new JVM instance.
-> Personally I use the `emacs` editor and [cider][16] only because I'm aged
-> and `emacs` is the editor I know how to configure and use the best.
+> 注記1：[`leiningen`][15] ビルドツールと比較した主な`boot`の利点は JVMクラスローダを
+利用することによってのみ、1つのJVMを使用できることです。
 
-> If you are interested in learning more about Emacs or CIDER [here are
-some references]
+> `nrepl`準拠のエディタを使って作業する場合、新しいJVMインスタンスを起動せずに` boot dev`
+コマンドで起動された `nrepl`サーバに接続できるはずです。
+> 個人的に私は `emacs`エディタと[cider][16] を使用しています。
+> なぜなら、私は年長者であるので、`emacs`は設定と使い方に関してベストなエディタだからです。
+> EmacsやCIDERについてもっと知りたい方は[ここにいくつかの参考文献があります]
+
 (https://github.com/magomimmo/modern-cljs/blob/master/doc/supplemental-material/emacs-cider-references.md).
 
-
-We can now evaluate CLJS expressions at the bREPL, but we first need a
-way to access the browser DOM.
+bREPLでCLJS式を評価できるようになりましたが、最初にブラウザDOMにアクセスする方法が必要です。
 
 ```clj
 cljs.user=> js/window
@@ -310,40 +308,34 @@ cljs.user> js/console
 
 ```
 
-As you see, when hosted by the JSVM of the browser, CLJS defines a
-`js` special namespace to allow accessing JS objects defined in the
-global space:
+ご覧のように、ブラウザのJSVMによってホストされている場合、CLJSは、グローバル空間で定義されたJSオブジェクトにアクセスするための特別な名前空間 `js` を定義します。
 
-* `js/window`: representing the browser's window
-* `js/document`: representing the document object (i.e. the DOM)
-* `js/console`: representing the JS console of the browser
+* `js/window`: ブラウザのウィンドウを表します
+* `js/document`: ドキュメントオブジェクト（DOM）を表します。
+* `js/console`: ブラウザのJSコンソールを表します。
 
-Being a guest programming language, CLJS can interoperate with the
-underlying JS engine via special forms.
-
-The `.` special form allows you to interoperate with the underlying JS
-engine like so: `(object.function *args)`:
+ゲストプログラミング言語であるCLJSは、special formを通してその配下のJSエンジンと相互運用
+できます`（object.function * args）`：
 
 ```clj
 cljs.user> (js/console.log "Hello from ClojureScript!")
 nil
 ```
 
-> NOTE 2: The `Iceweasel` web browser throws an error message when
-> console log is called from the bREPL but still outputs to the console.
-> This error message does not occur when the bREPL connects to the
-> `Chromium` web browser.
+> 注記2：コンソールログがbREPLから呼び出されても、コンソールに出力されても、
+> `Iceweasel` Webブラウザはエラーメッセージを投げます。このエラーメッセージは、
+> bREPLが `Chromium`ウェブブラウザに接続しても発生しません。
 
-Here we called the `log` function on the `console` object living in
-the `js` special namespace by passing to it the `"Hello from
-ClojureScript!"` string as an argument. The `/` char keeps a namespace
-name separated from the symbols defined in the namespace itself.
 
-You should see the `Hello from ClojureScript!` message printed in the
-JS console of your browser.
+ここでは、 特別な `js` 名前空間にある`console`オブジェクトの `log`関数へ
+`Hello from ClojureScript！'`文字列を引数として渡すことで` log`関数を呼
+び出しました。 `/` 文字は、名前空間自体で定義されているシンボルから分離された名前空
+間名を保持します。
 
-Let's now try to get the DOM elements of our login form using the same
-`.` interoperable special form:
+
+ブラウザのJSコンソールに `Hello from ClojureScript！` というメッセージが表示されます。
+
+次に、同じの相互運用可能なspecial formを使用して、ログインフォームのDOM要素を取得するとしましょう。
 
 ```clj
 cljs.user> (js/document.getElementById "loginForm")
@@ -356,11 +348,12 @@ cljs.user> (js/document.getElementById "submit")
 #object[HTMLInputElement [object HTMLInputElement]]
 ```
 
-Not so bad, but CLJS syntax supports some syntactic sugar for the
-previous interoperable scenario: `(.function +args)`. This syntactic
-sugar form is considered more idiomatic by Clojarians because it does
-not use the object as an implicit argument of the function. Let's try
-it:
+それほど悪くはありませんが、CLJSの構文は、以前の相互運用可能なシナリオである
+`（.function + args）` のシンタックスシュガーをサポートしています。このシンタックスシ
+ュガーの形態は、関数を暗黙の引数としてオブジェクトを使用しないので、Clojariansによってより
+慣用的と見なされます。試してみよう：
+
+Not so bad, but CLJS syntax supports some syntactic sugar for the previous interoperable scenario: `(.function +args)`. This syntactic sugar form is considered more idiomatic by Clojarians because it does not use the object as an implicit argument of the function. Let's try it:
 
 ```clj
 cljs.user> (.log js/console "Hello from ClojureScript!")

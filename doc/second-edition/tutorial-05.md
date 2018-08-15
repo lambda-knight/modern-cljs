@@ -1,13 +1,13 @@
 # Tutorial 5 - Introducing Domina
 
-In this tutorial we're going to introduce [Domina][1] to improve the
-idiomaticity of the login form validation we presented in
-the [previous tutorial][2].
+このチュートリアルでは、[前のチュートリアル][2]で示したログインフォームの妥当性を改善するために[Domina][1] を紹介します。
 
 ## Preamble
 
-If you want to start working from the end of the [previous tutorial][2],
-assuming you've [git][13] installed, do as follows:
+
+前のチュートリアル] [2]
+[git][13] がインストールされていると仮定して、[前のチュートリアル][2]の最後から作業を開始したい場合、以下のようにしてください：
+
 
 ```bash
 git clone https://github.com/magomimmo/modern-cljs.git
@@ -15,47 +15,37 @@ cd modern-cljs
 git checkout se-tutorial-04
 ```
 
-## Introduction
+## イントロダクション
 
-In the [previous tutorial][2] we started coding in CLJS by directly
-translating from JS to CLJS by using the [JS interop][7] features of
-CLJS. Now it's time to try something better.
+[前のチュートリアル][2]では、CLJSの[JS interop][7]機能を使用し、JSからCLJSに直接変換することによって、CLJSでコーディングをはじめました。
+今回はよりよいものを試しましょう。
 
-> [Domina][1] is a jQuery inspired DOM manipulation library for
-> ClojureScript. It provides a functional, idiomatic Clojure interface
-> to the DOM manipulation facilities provided by the Google Closure
-> library...  While Domina does not provide any innovations, it attempts to
-> provide a basic functional interface to DOM manipulation that feels
-> natural in ClojureScript.
+> [Domina][1] はClojureScript用のjQuery触発されたDOM操作ライブラリです。 Dominaはイノベーションを提供しませんが、ClojureScriptで
+> 自然なDOM操作の基本的なインタフェースを提供しようとしています。
 
-When I first met `clojurescriptone`in search for a CLJS guide,
-and read about `Design and templating`, I found myself very much in
-agreement with the following reasoning:
 
-> Many Clojure web applications use [Hiccup][5] for HTML templating. If
-> the programmer is also the designer, then Hiccup is ideal. However,
-> most developers are bad at design. We need to work with people who are
-> good at design and who don't need to care about Clojure. ClojureScript
-> One proposes one approach to templating which allows designers to work
-> with HTML, CSS and images without having to set an eye on Hiccup data
-> structures or those pesky parentheses.
+私がCLJSガイドを検索して最初に `clojurescriptone`に出会ったとき、`Design and templating`について読んだとき、私は次のような論拠
+によく合っていました。
 
-> NOTE 1: both `clojurescriptone` repo and the corresponding `Design
-> and templating` documentation have been removed and are no longer
-> available.
+多くのClojure WebアプリケーションはHTMLテンプレート作成に[Hiccup][5] を使用しています。プログラマーがデザイナーでもあれば、Hiccupは理想的で
+す。しかし、ほとんどの開発者はデザイナーとしては優れていないことが多いです。私たちは、デザインに優れ、Clojureを気にする必要のない人と協力
+する必要があります。 ClojureScriptOneは、Hiccupデータ構造や厄介な括弧に目を向けることなく、デザイナーがHTML、CSS、および画像を扱うことを
+可能にするテンプレート化のアプローチを提案しています。
 
-Our old `index.html` friend is going to be our pure HTML/CSS template
-and `domina` is going to be our CLJS library to interface the DOM of
-the page in more idiomatic CLJS.
+> 注1： `clojurescriptone`リポジトリに対応する` Design and templating`ド
+> キュメントは▽すでに削除されており、利用できません。
 
-Nowadays, the diffusion of the so called Single Page Application (SPA)
-is progressively changing the web development landscape and it's not
-unusual to see a single HTML page composed of one `div` tag only
-delegating all the DOM manipulation to JS.
 
-That said, there is still a very large number of organizations keeping
-the HTML designers separated from the developers and we should be
-ready to give life to a bunch of pure static HTML/CSS pages.
+私たちの古い `index.html`フレンドは純粋なHTML / CSSテンプレートとなり、` domina`はより慣用的なCLJSでページのDOMをインターフェースするCLJSライブラリになります。
+
+Our old `index.html` friend is going to be our pure HTML/CSS template and `domina` is going to be our CLJS library to interface the DOM of the page in more idiomatic CLJS.
+
+今日、いわゆるシングルページアプリケーション（SPA）の普及により、Web開発のやり方が徐々に変化しています.1つのdivタグで構成された単一のHTMLページが
+すべてのDOM操作をJSに委任するのはめずらしくないです。
+
+Nowadays, the diffusion of the so called Single Page Application (SPA) is progressively changing the web development landscape and it's not unusual to see a single HTML page composed of one `div` tag only delegating all the DOM manipulation to JS.
+
+That said, there is still a very large number of organizations keeping the HTML designers separated from the developers and we should be ready to give life to a bunch of pure static HTML/CSS pages.
 
 ## Domina lib
 
